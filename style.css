@@ -27,6 +27,8 @@ body {
     flex-direction: column;
     border: 6px ridge pink;
     border-radius: 15px;
+    height: 50vh;
+    width: 50vh;
     background-color: lightgrey;
 }
 
@@ -43,10 +45,12 @@ body {
     background-color: coral;
     justify-content: flex-end;
     align-items: center;
+    padding-right: 2vh;
 }
 
 #buttons {
     display: flex;
+    flex: 1;
     /* border: 2px solid blue; */
     justify-content: space-between;
 }
@@ -61,9 +65,24 @@ body {
 
 .input {
     margin: 4px;
-    height: auto;
-    width: 4vw;
-} 
+    height: 8vh;
+    width: 8vh;
+    border-radius: 12px;
+    /* height: auto;
+    width: 4vw; */
+}
+
+.special {
+    background-color: salmon;
+}
+
+.operator {
+    background-color: orchid;
+}
+
+.equal {
+    background-color: crimson;
+}
 
 #footer {
     display: flex;
