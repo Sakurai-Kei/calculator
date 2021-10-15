@@ -24,6 +24,26 @@
     border: 2px solid pink;
 }
 
+#buttons {
+    display: flex;
+    border: 2px solid blue;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid purple;
+    justify-content: space-between;
+    padding: 4px;
+}
+
+.input {
+    margin: 4px;
+    height: auto;
+    width: 4vw;
+} 
+
 #footer {
     display: flex;
     border: 2px solid black;
