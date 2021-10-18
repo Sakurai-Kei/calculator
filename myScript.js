@@ -1,6 +1,8 @@
 let currentInput;
 let number1 = 0;
 let number2 = 0;
+let answer;
+let operationSymbol;
 
 function add(a,b){
     return a+b;
@@ -19,7 +21,24 @@ function divide(a,b){
 }
 
 function operate(symbol){
-    // Detect the operation to be performed
+    switch(symbol){
+        case "+":
+            answer = add(number1,number2);
+            break;
+        case "-":
+            answer = subtract(number1,number2);
+            break;
+        case "X":
+            answer = multiply(number1,number2);
+            break;
+        case "÷":
+            answer = divide(number1,number2);
+            break;
+    }
+    number1 = answer;
+    number2 = 0;
+    currentInput = answer;
+    return answer;
 }
 
 function updateScreen(){
@@ -30,6 +49,7 @@ function updateScreen(){
 }
 
 function resetScreen(symbol){
+    //Shows the operation symbol
     const screen = document.querySelector('#screen');
     screen.textContent = `${symbol}`;
     currentInput = '';
@@ -60,14 +80,21 @@ operators.forEach((operator) => {
     operator.addEventListener('click', () => {
         if(number1 === 0){
             symbol = operator.textContent;
+            operationSymbol = symbol;
             savePrevious();
             resetScreen(symbol);
             updateScreen();
         }
-        else if(number1 !== 0){
+        else if(number1 !== 0 && number2 == 0){
+            symbol = operator.textContent;
             saveCurrent();
             resetScreen(symbol);
             updateScreen;
+        }
+        
+        if(number1 !== 0 && number2 !== 0){
+            operate(operationSymbol);
+            updateScreen();
         }
     });
 });
