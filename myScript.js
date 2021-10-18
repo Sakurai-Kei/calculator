@@ -1,4 +1,6 @@
 let currentInput;
+let number1 = 0;
+let number2 = 0;
 
 function add(a,b){
     return a+b;
@@ -27,8 +29,10 @@ function updateScreen(){
     screen.textContent = `${previous}${currentInput}`;
 }
 
-function resetScreen(){
-    //Reset screen once an operation button or equal is pressed
+function resetScreen(symbol){
+    const screen = document.querySelector('#screen');
+    screen.textContent = `${symbol}`;
+    currentInput = '';
 }
 
 function undo(){
@@ -42,9 +46,38 @@ function reset(){
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
+        const screen = document.querySelector('#screen');
+        if(screen.textContent == "+" | screen.textContent =="-" | screen.textContent == "X" | screen.textContent == "÷"){
+            screen.textContent = "";
+        }
         currentInput = parseInt(number.textContent);
-        // console.log(currentInput);
-        // console.log(typeof currentInput);
         updateScreen();
     });
 });
+
+const operators = document.querySelectorAll('.operator');
+operators.forEach((operator) => {
+    operator.addEventListener('click', () => {
+        if(number1 === 0){
+            symbol = operator.textContent;
+            savePrevious();
+            resetScreen(symbol);
+            updateScreen();
+        }
+        else if(number1 !== 0){
+            saveCurrent();
+            resetScreen(symbol);
+            updateScreen;
+        }
+    });
+});
+
+function savePrevious(){
+    const screen = document.querySelector('#screen');
+    number1 = parseInt(screen.textContent);
+}
+
+function saveCurrent(){
+    const screen = document.querySelector('#screen');
+    number2 = parseInt(screen.textContent);
+}
