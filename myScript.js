@@ -1,8 +1,9 @@
 let currentInput;
 let number1 = 0;
 let number2 = 0;
-let answer;
+let answer = 0;
 let operationSymbol;
+let onGoing; //This is to check if the calculator is still performing calculation
 
 function add(a,b){
     return a+b;
@@ -35,42 +36,36 @@ function operate(symbol){
             answer = divide(number1,number2);
             break;
     }
-    number1 = answer;
-    number2 = 0;
     currentInput = answer;
     return answer;
 }
 
 function updateScreen(){
-    // Update screen everytime it is supposed to change
     const screen = document.querySelector('#screen');
     previous = screen.textContent;
     screen.textContent = `${previous}${currentInput}`;
 }
 
-function resetScreen(symbol){
-    //Shows the operation symbol
-    const screen = document.querySelector('#screen');
-    screen.textContent = `${symbol}`;
-    currentInput = '';
-}
-
 function undo(){
-    //Undo once per click
+
 }
 
 function reset(){
-    //Reset the calculator to initial state
+
 }
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         const screen = document.querySelector('#screen');
-        if(screen.textContent == "+" | screen.textContent =="-" | screen.textContent == "X" | screen.textContent == "÷"){
+        if(screen.textContent == "+" | screen.textContent == "-" | screen.textContent == "X" | screen.textContent == "÷"){
             screen.textContent = "";
         }
-        currentInput = parseInt(number.textContent);
+        if(onGoing === true){
+            screen.textContent = "";
+            onGoing = false;
+        }
+        currentInput = number.textContent;
         updateScreen();
     });
 });
@@ -78,33 +73,32 @@ numbers.forEach((number) => {
 const operators = document.querySelectorAll('.operator');
 operators.forEach((operator) => {
     operator.addEventListener('click', () => {
+        const screen = document.querySelector('#screen');
         if(number1 === 0){
-            symbol = operator.textContent;
-            operationSymbol = symbol;
-            savePrevious();
-            resetScreen(symbol);
-            updateScreen();
+            number1 = Number(screen.textContent);
+            operationSymbol = operator.textContent;
+            screen.textContent = operator.textContent
         }
-        else if(number1 !== 0 && number2 == 0){
-            symbol = operator.textContent;
-            saveCurrent();
-            resetScreen(symbol);
-            updateScreen;
-        }
-        
-        if(number1 !== 0 && number2 !== 0){
-            operate(operationSymbol);
-            updateScreen();
-        }
-    });
-});
 
-function savePrevious(){
-    const screen = document.querySelector('#screen');
-    number1 = parseInt(screen.textContent);
-}
+        else if(number1 !== 0 && number2 === 0){
+            number2 = Number(screen.textContent);
+            onGoing = true;
+            number1 = operate(operationSymbol);
+            number2 = 0;
+            screen.textContent = answer;
+            operationSymbol = operator.textContent;
+        }
+    })
+})
 
-function saveCurrent(){
+const calculate = document.querySelector('.equal');
+calculate.addEventListener('click', () => {
+    // console.log('It\'s Working');
     const screen = document.querySelector('#screen');
-    number2 = parseInt(screen.textContent);
-}
+    number2 = Number(screen.textContent);
+    screen.textContent = operate(operationSymbol);
+    number1 = 0;
+    number2 = 0;
+    onGoing = true;
+    operationSymbol = undefined;
+})
