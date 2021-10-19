@@ -75,6 +75,10 @@ const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
         const screen = document.querySelector('#screen');
+        if(screen.textContent.length >= 12){
+            alert('Decimal place is too high. Calculator will stop registering more input');
+            return;
+        }
         if(screen.textContent == "+" | screen.textContent == "-" | screen.textContent == "X" | screen.textContent == "÷"){
             screen.textContent = "";
         }
