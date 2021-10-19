@@ -1,8 +1,8 @@
 Calculator Project for TOP Foundation.
 
 Goals and Restraint:
-<p>~~1) Able to do operation such as addition, subtraction, multiplication and division.~~</p>
-<p>~~2) Only processes two numbers at a time~~</p>
+<p>1) Able to do operation such as addition, subtraction, multiplication and division.</p>
+<p>2) Only processes two numbers at a time</p>
 <p>3) Allow user to interact with front-end GUI to input numbers and select operation to be performed
 </p>
 <p>4) Limit decimal number to prevent overflow

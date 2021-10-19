@@ -37,6 +37,14 @@ function operate(symbol){
             break;
     }
     currentInput = answer;
+    if(answer == Infinity){
+        reset();
+        alert('Unfortunately, you do not have the hardware capable to calculate this :( \nCalculator now resetting to initial state');
+    }
+    else if(isNaN(answer)){
+        reset();
+        alert('Answer calculated does not result in a number. Calculator now resetting to initial state');
+    }
     return answer;
 }
 
@@ -47,11 +55,20 @@ function updateScreen(){
 }
 
 function undo(){
-
+    const screen = document.querySelector('#screen');
+    previous = screen.textContent;
+    newPrevious = previous.slice(0,previous.length-1);
+    screen.textContent = newPrevious;
 }
 
 function reset(){
-
+    const screen = document.querySelector('#screen');
+    screen.textContent = "";
+    number1 = 0;
+    number2 = 0;
+    answer = 0;
+    operationSymbol = undefined;
+    onGoing = undefined;
 }
 
 const numbers = document.querySelectorAll('.number');
@@ -76,12 +93,22 @@ operators.forEach((operator) => {
         const screen = document.querySelector('#screen');
         if(number1 === 0){
             number1 = Number(screen.textContent);
+            if(isNaN(number1)){
+                reset();
+                alert('First number was not a number. Calculator now resetting');
+                return;
+            }
             operationSymbol = operator.textContent;
             screen.textContent = operator.textContent
         }
 
         else if(number1 !== 0 && number2 === 0){
             number2 = Number(screen.textContent);
+            if(isNaN(number2)){
+                reset();
+                alert('Second number was not a number. Calculator now resetting');
+                return;
+            }
             onGoing = true;
             number1 = operate(operationSymbol);
             number2 = 0;
@@ -96,9 +123,28 @@ calculate.addEventListener('click', () => {
     // console.log('It\'s Working');
     const screen = document.querySelector('#screen');
     number2 = Number(screen.textContent);
+    if(isNaN(number2)){
+        reset();
+        alert('Second number was not a number. Calculator now resetting');
+        return;
+    }
     screen.textContent = operate(operationSymbol);
     number1 = 0;
     number2 = 0;
     onGoing = true;
     operationSymbol = undefined;
+})
+
+const specials = document.querySelectorAll('.special')
+specials.forEach((special) => {
+    special.addEventListener('click', () => {
+        switch(special.textContent){
+            case "CLR":
+                reset();
+                break;
+            case "DEL":
+                undo();
+                break;
+        }
+    })
 })
