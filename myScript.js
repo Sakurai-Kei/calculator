@@ -66,6 +66,10 @@ function undo(){
     if(onGoing == false){
         previous = screen.textContent;
         newPrevious = previous.slice(0,previous.length-1);
+        if(previous.slice(-1) == "^"){
+            number1 = 0;
+            operationSymbol = undefined;
+        }
         screen.textContent = newPrevious;
         if(newPrevious == ""){
             if(number1 !== 0){
@@ -180,6 +184,9 @@ specials.forEach((special) => {
                 reset();
                 break;
             case "DEL":
+                console.log(number1);
+                console.log(number2);
+                console.log(operationSymbol);
                 undo();
                 break;
         }
