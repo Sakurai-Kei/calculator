@@ -67,6 +67,10 @@ function undo(){
         previous = screen.textContent;
         newPrevious = previous.slice(0,previous.length-1);
         screen.textContent = newPrevious;
+        if(newPrevious == ""){
+            number1 = 0;
+            operationSymbol = undefined;
+        }
     }
 }
 
@@ -149,9 +153,9 @@ calculate.addEventListener('click', () => {
         }
         const exponentIndex = found.indexOf('^');
         number2 = Number(found.slice(exponentIndex+1));
-        console.log(number2);
-        console.log(found);
-        console.log(exponentIndex);
+        // console.log(number2);
+        // console.log(found);
+        // console.log(exponentIndex);
     }
     screen.textContent = operate(operationSymbol);
     number1 = 0;
