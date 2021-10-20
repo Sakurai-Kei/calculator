@@ -188,8 +188,13 @@ specials.forEach((special) => {
 
 const exponent = document.querySelector('.exponent');
 exponent.addEventListener('click', () => {
-    onGoing = false;
     const screen = document.querySelector('#screen');
+    if(number1 !== 0){
+        number2 = Number(screen.textContent);
+        operate(operationSymbol);
+        screen.textContent = answer;
+    }
+    onGoing = false;
     number1 = Number(screen.textContent);
     beforeExponent = screen.textContent;
     screen.textContent = `${beforeExponent}^`
