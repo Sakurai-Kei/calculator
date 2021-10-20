@@ -188,6 +188,7 @@ specials.forEach((special) => {
 
 const exponent = document.querySelector('.exponent');
 exponent.addEventListener('click', () => {
+    onGoing = false;
     const screen = document.querySelector('#screen');
     number1 = Number(screen.textContent);
     beforeExponent = screen.textContent;
