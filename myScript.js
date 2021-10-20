@@ -21,6 +21,10 @@ function divide(a,b){
     return a/b;
 }
 
+function powerOf(base,power){
+    return Math.pow(base,power);
+}
+
 function operate(symbol){
     switch(symbol){
         case "+":
@@ -34,6 +38,9 @@ function operate(symbol){
             break;
         case "÷":
             answer = divide(number1,number2);
+            break;
+        case "EXP":
+            answer = powerOf(number1,number2);
             break;
     }
     currentInput = answer;
@@ -130,9 +137,21 @@ calculate.addEventListener('click', () => {
     const screen = document.querySelector('#screen');
     number2 = Number(screen.textContent);
     if(isNaN(number2)){
-        reset();
-        alert('Second number was not a number. Calculator now resetting');
-        return;
+        //Check if is doing exponent calculation
+        const screenDisplay = screen.textContent
+        const regex = /[^]/g;
+        const found = screenDisplay.match(regex);
+        if(found == ""){
+            reset();
+            alert('Second number was not a number. Calculator now resetting');
+            return;
+    
+        }
+        const exponentIndex = found.indexOf('^');
+        number2 = Number(found.slice(exponentIndex+1));
+        console.log(number2);
+        console.log(found);
+        console.log(exponentIndex);
     }
     screen.textContent = operate(operationSymbol);
     number1 = 0;
@@ -153,4 +172,13 @@ specials.forEach((special) => {
                 break;
         }
     })
+})
+
+const exponent = document.querySelector('.exponent');
+exponent.addEventListener('click', () => {
+    const screen = document.querySelector('#screen');
+    number1 = Number(screen.textContent);
+    beforeExponent = screen.textContent;
+    screen.textContent = `${beforeExponent}^`
+    operationSymbol = exponent.textContent;
 })
