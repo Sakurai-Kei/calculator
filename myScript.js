@@ -107,6 +107,10 @@ numbers.forEach((number) => {
             onGoing = false;
         }
         if(number.textContent == "Ans"){
+            if(screen.textContent != ""){
+                screen.textContent = "";
+            }
+            onGoing = true;
             currentInput = answer;
             updateScreen()
             return;
