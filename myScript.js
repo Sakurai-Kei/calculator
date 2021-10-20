@@ -99,6 +99,11 @@ numbers.forEach((number) => {
             screen.textContent = "";
             onGoing = false;
         }
+        if(number.textContent == "Ans"){
+            currentInput = answer;
+            updateScreen()
+            return;
+        }
         currentInput = number.textContent;
         updateScreen();
     });
