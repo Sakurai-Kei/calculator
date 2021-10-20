@@ -3,7 +3,7 @@ let number1 = 0;
 let number2 = 0;
 let answer = 0;
 let operationSymbol;
-let onGoing; //This is to check if the calculator is still performing calculation
+let onGoing = false; //This is to check if the calculator is still performing calculation
 
 function add(a,b){
     return a+b;
@@ -56,9 +56,11 @@ function updateScreen(){
 
 function undo(){
     const screen = document.querySelector('#screen');
-    previous = screen.textContent;
-    newPrevious = previous.slice(0,previous.length-1);
-    screen.textContent = newPrevious;
+    if(onGoing == false){
+        previous = screen.textContent;
+        newPrevious = previous.slice(0,previous.length-1);
+        screen.textContent = newPrevious;
+    }
 }
 
 function reset(){
