@@ -218,6 +218,6 @@ help.addEventListener('click', () => {
     will reset back to its' initial state
     \nThe calculator is also able to save its last calculated answer in Ans button.
     User can use it if they are attempting to do iterations in quick successions
-    \nDEL allows user to undo their number input but not operator input.
+    \nDEL allows user to undo their number and operator input
     \nCLR resets the calculator back to initial state`)
 })
