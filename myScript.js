@@ -164,7 +164,7 @@ calculate.addEventListener('click', () => {
     
         }
         const exponentIndex = found.indexOf('^');
-        number2 = Number(found.slice(exponentIndex+1));
+        number2 = Number(found.slice(exponentIndex+1).join(''));
         // console.log(number2);
         // console.log(found);
         // console.log(exponentIndex);
@@ -184,9 +184,9 @@ specials.forEach((special) => {
                 reset();
                 break;
             case "DEL":
-                console.log(number1);
-                console.log(number2);
-                console.log(operationSymbol);
+                // console.log(number1);
+                // console.log(number2);
+                // console.log(operationSymbol);
                 undo();
                 break;
         }
