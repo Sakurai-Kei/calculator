@@ -68,6 +68,9 @@ function undo(){
         newPrevious = previous.slice(0,previous.length-1);
         screen.textContent = newPrevious;
         if(newPrevious == ""){
+            if(number1 !== 0){
+                screen.textContent = number1;
+            }
             number1 = 0;
             operationSymbol = undefined;
         }
@@ -190,4 +193,18 @@ exponent.addEventListener('click', () => {
     beforeExponent = screen.textContent;
     screen.textContent = `${beforeExponent}^`
     operationSymbol = exponent.textContent;
+})
+
+const help = document.querySelector('.help');
+help.addEventListener('click', () => {
+    alert(`Welcome!
+    \nThis calculator can perform basic math computations such as
+    addition, subtraction, multiplication, division and exponent.
+    \nThe calculator will detect if the user enters a NaN input such as 
+    multiple decimal point in a number. If such case were to occur, the calculator
+    will reset back to its' initial state
+    \nThe calculator is also able to save its last calculated answer in Ans button.
+    User can use it if they are attempting to do iterations in quick successions
+    \nDEL allows user to undo their number input but not operator input.
+    \nCLR resets the calculator back to initial state`)
 })

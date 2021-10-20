@@ -88,4 +88,5 @@ body {
     display: flex;
     /* border: 2px solid black; */
     margin-top: auto;
+    justify-content: center;
 }
