@@ -1,4 +1,4 @@
-let currentInput;
+let currentInput = undefined;
 let number1 = 0;
 let number2 = 0;
 let answer = 0;
@@ -84,11 +84,12 @@ function undo(){
 function reset(){
     const screen = document.querySelector('#screen');
     screen.textContent = "";
+    currentInput = undefined;
     number1 = 0;
     number2 = 0;
     answer = 0;
-    operationSymbol = undefined;
-    onGoing = undefined;
+    operationSymbol;
+    onGoing = false;
 }
 
 const numbers = document.querySelectorAll('.number');
@@ -103,11 +104,13 @@ numbers.forEach((number) => {
             screen.textContent = "";
         }
         if(onGoing === true){
-            screen.textContent = "";
+            if(operationSymbol != "EXP"){
+                screen.textContent = "";
+            }
             onGoing = false;
         }
         if(number.textContent == "Ans"){
-            if(screen.textContent != ""){
+            if(screen.textContent != "" && operationSymbol != "EXP"){
                 screen.textContent = "";
             }
             onGoing = true;
